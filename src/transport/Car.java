@@ -1,5 +1,7 @@
 package transport;
 
+import java.util.Objects;
+
 public class Car {
     private final String brand;
     private final String model;
@@ -12,6 +14,27 @@ public class Car {
     private String gears;
     private String regNumber;
     private boolean summerTires;
+    private Key key;
+
+    public static class Key {
+        private final boolean remoteEngineLaunch;
+        private final boolean keylessAccess;
+    public Key (boolean remoteEngineLaunch, boolean keylessAccess) {
+        this.remoteEngineLaunch = remoteEngineLaunch;
+        this.keylessAccess = keylessAccess;
+    }
+        public Key () {
+            this(false, false);
+        }
+
+        public boolean isRemoteEngineLaunch() {
+            return remoteEngineLaunch;
+        }
+
+        public boolean isKeylessAccess() {
+            return keylessAccess;
+        }
+    }
 
 
     public String getBrand() {
@@ -21,7 +44,6 @@ public class Car {
     public String getModel() {
         return model;
     }
-
     public int getYear() {
         return year;
     }
@@ -78,21 +100,31 @@ public class Car {
         this.summerTires = summerTires;
     }
 
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
+    }
+
     public Car(String brand, String model, float engineVolume, String colour, int year, String country, String bodyType, int seats, String gears, String regNumber) {
-        if (brand == null || brand.isEmpty()) {
+        if (brand == null || brand.isEmpty() || brand.isBlank()) {
             this.brand = "Default";
         } else {
             this.brand = brand;
         }
-        if (model == null || model.isEmpty()) {
+        if (model == null || model.isEmpty() || model.isBlank()) {
             this.model = "Default";
         } else {
             this.model = model;
-        } if (engineVolume <= 0) {
+        }
+        if (engineVolume <= 0) {
             this.engineVolume = 1.5f;
         } else {
             this.engineVolume = engineVolume;
-        } if (country == null || country.isEmpty()) {
+        }
+        if (country == null || country.isEmpty() || country.isBlank()) {
             this.country = "Default";
         } else {
             this.country = country;
@@ -102,7 +134,7 @@ public class Car {
         } else {
             this.year = year;
         }
-        if (colour == null || colour.isEmpty()) {
+        if (colour == null || colour.isEmpty() || colour.isBlank()) {
             this.colour = "White";
         } else {
             this.colour = colour;
@@ -127,7 +159,11 @@ public class Car {
         } else {
             this.regNumber = regNumber;
         }
-       this.summerTires = isSummerTires();
-
+        this.summerTires = isSummerTires();
+        if (key == null) {
+            this.key = new Key();
+        } else {
+            this.key = key;
+        }
     }
 }

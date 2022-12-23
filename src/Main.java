@@ -13,6 +13,12 @@ public class Main {
         car3.setSummerTires(true);
         car4.setSummerTires(false);
         car5.setSummerTires(true);
+        car1.setRegNumber("AB 6083 KH");
+        car1.setKey(new Car.Key(false, false));
+        car2.setKey(new Car.Key(true , false));
+        car3.setKey(new Car.Key(true, true));
+        car4.setKey(new Car.Key(false, true));
+        car5.setKey(new Car.Key(true, false));
         printInfo(car1);
         printInfo(car2);
         printInfo(car3);
@@ -31,7 +37,9 @@ public class Main {
                 ", тип кузова: " + car.getBodyType() +
                 ", регистрационный номер: " + car.getRegNumber() +
                 ", количество мест: " + car.getSeats() +
-                ", " + (car.isSummerTires() ? "летняя" :  "зимняя") + " резина"
+                ", " + (car.isSummerTires() ? "летняя" :  "зимняя") + " резина" +
+                        ", " + (car.getKey().isKeylessAccess()? "с бесключевым" : "с ключевым") + " доступом" +
+                        " и " + (car.getKey().isRemoteEngineLaunch()? "c функцией дистанционного запуска двигателя" : "без функции дистанционного запуска двигателя")
         );
     }
 }
